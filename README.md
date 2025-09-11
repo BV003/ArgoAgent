@@ -3,6 +3,7 @@
 <div align="center">
   <img src="./pics/logo.png" alt="Logo" width="200">
   <h1 align="center">ArgoAgent</h1>
+  <h2 align="center">A vessel not of wood, but of discovery</h2>
 </div>
 
 
