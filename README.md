@@ -4,10 +4,7 @@
   <img src="./pics/logo.png" alt="Logo" width="200">
   <h1 align="center">ArgoAgent</h1>
   <h2 align="center">A vessel not of wood, but of discovery</h2>
-</div>
-
-<!-- Keep these links. Translations will automatically update with the README. -->
-[Deutsch](https://zdoc.app/de/BV003/ArgoAgent) | 
+  [Deutsch](https://zdoc.app/de/BV003/ArgoAgent) | 
 [English](https://zdoc.app/en/BV003/ArgoAgent) | 
 [Español](https://zdoc.app/es/BV003/ArgoAgent) | 
 [français](https://zdoc.app/fr/BV003/ArgoAgent) | 
@@ -16,6 +13,10 @@
 [Português](https://zdoc.app/pt/BV003/ArgoAgent) | 
 [Русский](https://zdoc.app/ru/BV003/ArgoAgent) | 
 [中文](https://zdoc.app/zh/BV003/ArgoAgent)
+</div>
+
+<!-- Keep these links. Translations will automatically update with the README. -->
+
 
 
 ### 🚀 Introduction
