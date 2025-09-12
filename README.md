@@ -8,6 +8,7 @@
 </div>
 <div align="center">
 <!-- Keep these links. Translations will automatically update with the README. -->
+  
 [Deutsch](https://zdoc.app/de/BV003/ArgoAgent) | 
 [English](https://zdoc.app/en/BV003/ArgoAgent) | 
 [Español](https://zdoc.app/es/BV003/ArgoAgent) | 
@@ -17,6 +18,7 @@
 [Português](https://zdoc.app/pt/BV003/ArgoAgent) | 
 [Русский](https://zdoc.app/ru/BV003/ArgoAgent) | 
 [中文](https://zdoc.app/zh/BV003/ArgoAgent)
+
 </div>
 
 
