@@ -1,8 +1,9 @@
-from src.argoagent.core.agent import Agent
-from src.argoagent.tools.registry import ToolRegistry
-from src.argoagent.tools.builtins.filesystem import EchoTool
-from src.argoagent.tools.builtins.fetch import FetchTool
-from src.argoagent.core.llm import create_llm
+from argoagent.core.agent import Agent
+from argoagent.tools.registry import ToolRegistry
+from argoagent.tools.builtins.filesystem import EchoTool
+from argoagent.tools.builtins.fetch import FetchTool
+from argoagent.core.llm import create_llm
+
 
 if __name__ == "__main__":
     agent = Agent()
@@ -16,6 +17,6 @@ if __name__ == "__main__":
     print("Result1:", result1)
 
     # 调用 LLM (用OpenAI)
-    llm = create_llm(provider="openai", model="gpt-4o-mini")
+    llm = create_llm(provider="doubao", model="doubao-1-5-lite-32k-250115")
     reply = llm.generate("Say hello to MCP world!")
     print("LLM reply:", reply)

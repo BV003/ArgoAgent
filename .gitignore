@@ -1,0 +1,49 @@
+# 操作系统相关文件
+.DS_Store
+Thumbs.db
+
+# Python 编译生成的文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 项目依赖目录（如果使用虚拟环境，也可忽略）
+venv/
+env/
+.venv/
+*.egg-info/
+
+# 字节码和缓存文件
+*.pyc
+*.pyo
+*.pyd
+
+# 编辑器和IDE相关文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 环境变量文件（包含敏感信息，如 API 密钥等）
+.env
+
+# 测试和覆盖率报告
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+.pytest_cache/
+
+# 构建和分发文件
+dist/
+build/
+*.egg
+*.manifest
+*.spec
+
+# Jupyter Notebook 相关
+.ipynb_checkpoints/
+
+# 临时文件
+tmp/
+temp/
