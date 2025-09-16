@@ -5,7 +5,7 @@ class FetchTool(Tool):
     name = "fetch"
     description = "Fetch content from a URL"
 
-    def run(self, url: str, max_length: int = 3000):
+    def run(self, url: str, max_length: int = 1000):
         """
         从指定 URL 获取内容。
         参数:
