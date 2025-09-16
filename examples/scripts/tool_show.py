@@ -12,11 +12,15 @@ if __name__ == "__main__":
 
     print("Available tools:", agent.registry.list_tools())
 
-    # 用工具
-    result1 = agent.run("echo", text="Hello MCP")
-    print("Result1:", result1)
+    # # echo tool
+    # result1 = agent.run("echo", text="Hello MCP")
+    # print("Result1:", result1)
 
-    # 调用 LLM 
-    llm = create_llm(provider="doubao", model="doubao-1-5-lite-32k-250115")
-    reply = llm.generate("Say hello to MCP world!")
-    print("LLM reply:", reply)
+    # # 调用 LLM 
+    # llm = create_llm(provider="doubao", model="doubao-1-5-lite-32k-250115")
+    # reply = llm.generate("Say hello to MCP world!")
+    # print("LLM reply:", reply)
+
+    # 用 FetchTool
+    result = agent.run("fetch", url="https://www.baidu.com")
+    print("FetchResult:", result)

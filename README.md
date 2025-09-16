@@ -58,7 +58,7 @@ ArgoAgent/
 │       ├── tools/               # 工具系统
 │       │   ├── base.py          # 工具基类与注册器
 │       │   ├── builtins/        # 内置工具（文件、网络等）
-│       │   │   ├── filesystem.py
+│       │   │   ├── echo.py
 │       │   │   └── fetch.py
 │       │   └── registry.py      # 工具注册表
 │       ├── workflows/           # 工作流模式（可组合）
