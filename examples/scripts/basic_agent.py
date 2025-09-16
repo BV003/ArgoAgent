@@ -2,7 +2,7 @@ from argoagent.core.agent import Agent
 from argoagent.tools.registry import ToolRegistry
 from argoagent.tools.builtins.echo import EchoTool
 from argoagent.tools.builtins.fetch import FetchTool
-from argoagent.core.llm import create_llm
+from argoagent.llm import create_llm
 
 
 if __name__ == "__main__":

@@ -49,8 +49,12 @@ ArgoAgent/
 │       ├── __init__.py
 │       ├── core/                # 核心组件
 │       │   ├── agent.py         # 代理基类与逻辑
-│       │   ├── llm.py           # LLM调用封装（支持多模型）
 │       │   └── context.py       # 上下文管理（存储对话/任务状态）
+│       ├── llm/                 # LLM调用
+│       │   ├── _init_.py         
+│       │   ├── base_llm.py      # 基类
+│       │   ├── doubao_llm.py          
+│       │   └── openai_llm.py       
 │       ├── tools/               # 工具系统
 │       │   ├── base.py          # 工具基类与注册器
 │       │   ├── builtins/        # 内置工具（文件、网络等）
