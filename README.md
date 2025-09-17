@@ -27,7 +27,7 @@
 
 
 ### ✨ Features
-- 做成包，package
+- Intelligent Interaction with Context Preservation: Automatically determines whether to call external tools or generate direct LLM responses based on user instructions, while maintaining context throughout the interaction.
 
 
 ### 🌐 Environment
@@ -107,6 +107,9 @@ If you are new to open source:
 - Don’t worry! This project is meant to be beginner-friendly 
 - You can start small (update README, add comments, fix small bugs) 
 - You can build on top of this project, customize it, and even use it as part of your course assignments or personal practice projects.🤪
+
+### 🙏 Acknowledgments
+This project draws inspiration from and builds upon the following projects:
 
 ### 🎉 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
