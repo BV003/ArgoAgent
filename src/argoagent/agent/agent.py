@@ -128,15 +128,15 @@ class Agent:
             self.context.add_message(role="agent", content=parsed["content"])
             return parsed["content"]
 
-    # 循环调用
-    def run_loop(self, user_input: str, max_steps: int = 5) -> str:
-        """循环调用：多步决策，直到完成任务或达到最大步数（扩展自单步逻辑）"""
-        current_input = user_input
-        for _ in range(max_steps):
-            result = self.run_single_step(current_input)
-            # 判断是否需要继续（可根据业务场景自定义终止条件）
-            if "任务已完成" in result or "无需进一步操作" in result:
-                return result
-            # 否则，将当前结果作为下一步的输入（模拟多轮对话）
-            current_input = f"基于上一步结果，继续处理：{result}"
-        return f"已完成最大步数（{max_steps}），当前结果：{result}"
+    # # 循环调用
+    # def run_loop(self, user_input: str, max_steps: int = 5) -> str:
+    #     """循环调用：多步决策，直到完成任务或达到最大步数（扩展自单步逻辑）"""
+    #     current_input = user_input
+    #     for _ in range(max_steps):
+    #         result = self.run_single_step(current_input)
+    #         # 判断是否需要继续（可根据业务场景自定义终止条件）
+    #         if "任务已完成" in result or "无需进一步操作" in result:
+    #             return result
+    #         # 否则，将当前结果作为下一步的输入（模拟多轮对话）
+    #         current_input = f"基于上一步结果，继续处理：{result}"
+    #     return f"已完成最大步数（{max_steps}），当前结果：{result}"
