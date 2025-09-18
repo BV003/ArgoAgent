@@ -27,7 +27,8 @@
 
 
 ### ✨ Features
-- Intelligent Interaction with Context Preservation: Automatically determines whether to call external tools or generate direct LLM responses based on user instructions, while maintaining context throughout the interaction.
+#### Intelligent Interaction with Context Preservation
+Automatically determines whether to call external tools or generate direct LLM responses based on user instructions, while maintaining context throughout the interaction.
 
 
 ### 🌐 Environment
