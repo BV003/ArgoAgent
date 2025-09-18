@@ -55,9 +55,6 @@ Automatically determines whether to call external tools or generate direct LLM r
 │   │   ├── tools
 │   │   │   ├── base.py
 │   │   │   ├── builtins
-│   │   │   │   ├── __pycache__
-│   │   │   │   │   ├── echo.cpython-310.pyc
-│   │   │   │   │   └── fetch.cpython-310.pyc
 │   │   │   │   ├── echo.py
 │   │   │   │   └── fetch.py
 │   │   │   ├── file
