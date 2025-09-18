@@ -108,8 +108,11 @@ If you are new to open source:
 - You can start small (update README, add comments, fix small bugs) 
 - You can build on top of this project, customize it, and even use it as part of your course assignments or personal practice projects.🤪
 
-### 🙏 Acknowledgments
-This project draws inspiration from and builds upon the following projects:
 
 ### 🎉 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### 🙏 Acknowledgments
+This project draws inspiration from and builds upon the following projects:
+- [mcp-agent](https://github.com/lastmile-ai/mcp-agent) 
+- [OpenHands](https://github.com/All-Hands-AI/OpenHands) 
