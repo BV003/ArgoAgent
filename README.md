@@ -114,3 +114,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 This project draws inspiration from and builds upon the following projects:
 - [mcp-agent](https://github.com/lastmile-ai/mcp-agent) 
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) 
+- [llm-mcp-rag](https://github.com/KelvinQiu802/llm-mcp-rag)
