@@ -116,3 +116,4 @@ This project draws inspiration from and builds upon the following projects:
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) 
 - [llm-mcp-rag](https://github.com/KelvinQiu802/llm-mcp-rag)
 - [Building effective agents by Anthropic](https://www.anthropic.com/engineering/building-effective-agents)✅
+- [A video about Prompt, Agent, MCP](https://www.bilibili.com/video/BV1aeLqzUE6L/?spm_id_from=333.788.recommend_more_video.0&vd_source=6710a28cdc7d2834e160d5fb90681095)✅
