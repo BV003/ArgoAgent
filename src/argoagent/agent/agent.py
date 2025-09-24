@@ -7,11 +7,12 @@ import json
 import re
 
 class Agent:
-    def __init__(self, name="ArgoAgent",llm= None):
+    def __init__(self, name="ArgoAgent",llm= None,context: Context = None,retrieved_context: str = ""):
         self.name = name
         self.registry = ToolRegistry()
-        self.context = Context()
+        self.context = context if context is not None else Context()
         self.llm = llm
+        self.retrieved_context: str = retrieved_context
         
     # 执行工具
     def run(self, tool_name: str, **kwargs):
