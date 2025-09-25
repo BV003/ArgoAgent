@@ -73,7 +73,65 @@ Automatically determines whether to call external tools or generate direct LLM r
     
 ```
 
+```mermaid
+classDiagram
+    class Agent {
+        +init(),初始化方法，连接 MCP 服务器并加载工具，创建 LLM 实例。
+        +close(),关闭所有 MCP 客户端连接。
+        +invoke(prompt: string),核心方法，接收用户输入，协调 LLM 与工具调用，处理循环工具调用逻辑，返回最终结果。
+        
+        -mcpClients: MCPClient[],存储多个 MCP 客户端实例，用于工具调用。
+        -llm: ChatOpenAI,ChatOpenAI 实例，负责与大语言模型交互。
+        -model: string,使用的大语言模型名称
+        -systemPrompt: string,系统提示词，用于初始化模型行为。
+        -context: string,注入模型的上下文信息（如 RAG 检索结果）
+    }
+    class ChatOpenAI {
+        +chat(prompt?: string),与 LLM 对话的核心方法，支持传入用户提示，返回模型响应（包含文本内容和工具调用信息），支持流式输出。
+        +appendToolResult(toolCallId: string, toolOutput: string),将工具调用结果追加到对话历史，供模型后续处理。
 
+        getToolsDefinition()：将 MCP 工具转换为 OpenAI 工具调用格式。
+
+        -llm: OpenAI,OpenAI 官方 SDK 实例，用于调用 API。
+        -model: string,使用的大语言模型名称。
+        -messages: OpenAI.Chat.ChatCompletionMessageParam[],存储对话历史消息（包括用户输入、模型输出、工具调用结果）。
+        -tools: Tool[],可用的工具列表（从 MCP 客户端获取）。
+
+    }
+    class EmbeddingRetriever {
+        +embedDocument(document: string) 将文档转换为向量嵌入并存储到向量库。
+        +embedQuery(query: string) 将用户查询转换为向量嵌入。
+        +retrieve(query: string, topK: number) 根据查询向量从向量库中检索最相关的 topK 个文档。
+        -embeddingModel: string ,使用的嵌入模型名称（如 BAAI/bge-m3）
+        -vectorStore: VectorStore ,向量存储实例，用于存储和检索文档嵌入。
+    }
+    class MCPClient {
+        +init()
+        +close()
+        +getTools()
+        +callTool(name: string, params: Record<string, any>)
+        -mcp: Client
+        -command: string
+        -args: string[]
+        -transport: StdioClientTransport
+        -tools: Tool[]
+    }
+    class VectorStore {
+        +addEmbedding(embedding: number[], document: string)将向量嵌入与对应文档添加到存储中
+        +search(queryEmbedding: number[], topK: number)计算查询向量与存储中所有向量的余弦相似度，返回最相似的 topK 个文档。
+        -vectorStore: VectorStoreItem[] 存储向量嵌入及对应文档的列表。
+    }
+    class VectorStoreItem {
+        -embedding: number[] 文档的向量嵌入。
+        -document: string 嵌入对应的原始文档内容。
+    }
+
+    Agent --> MCPClient : uses
+    Agent --> ChatOpenAI : interacts with
+    ChatOpenAI --> ToolCall : manages
+    EmbeddingRetriever --> VectorStore : uses
+    VectorStore --> VectorStoreItem : contains
+```
 
 ### ⚡ Quick Start
 - 
@@ -117,4 +175,4 @@ This project draws inspiration from and builds upon the following projects:
 - [llm-mcp-rag](https://github.com/KelvinQiu802/llm-mcp-rag)
 - [Building effective agents by Anthropic](https://www.anthropic.com/engineering/building-effective-agents)✅
 - [A video about Prompt, Agent, MCP](https://www.bilibili.com/video/BV1aeLqzUE6L/?spm_id_from=333.788.recommend_more_video.0&vd_source=6710a28cdc7d2834e160d5fb90681095)✅
-- [MCP SDK(python)](https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#fastmcp-properties)
+- [MCP SDK(python)](https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#fastmcp-properties)✅

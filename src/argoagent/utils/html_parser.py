@@ -1,5 +1,3 @@
-只是utils，不是tool，不需要llm使用，得到fetch后调用就可以了
-
 from bs4 import BeautifulSoup  # 需要安装 beautifulsoup4（pip install beautifulsoup4）
 from ..base import Tool  
  
