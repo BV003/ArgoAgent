@@ -1,22 +1,24 @@
 from ..tools.registry import ToolRegistry
 from typing import Dict, Any, Optional, List  # 根据代码实际使用的类型补充
 
-from ..context.context import Context          # 上下文（假设你在 core/context.py 定义）
+from ..context.log_context import LogContext          # 上下文（假设你在 core/context.py 定义）
 from ..llm.base_llm import BaseLLM
 import json
 import re
 
 class Agent:
-    def __init__(self, name="ArgoAgent",llm= None,context: Context = None,retrieved_context: str = ""):
+class ArgoAgent:
+    def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None):
         self.name = name
-        self.registry = ToolRegistry()
-        self.context = context if context is not None else Context()
         self.llm = llm
-        self.retrieved_context: str = retrieved_context
+        self.log_context = log_context
+        self.retrieved_context = retrieved_context
+        self.tool_registry = tool_registry 
+
         
     # 执行工具
     def run(self, tool_name: str, **kwargs):
-        tool = self.registry.get(tool_name)
+        tool = self.tool_registry.get(tool_name)
         if not tool:
             raise ValueError(f"Tool {tool_name} not found")
         return tool.run(**kwargs)
@@ -89,12 +91,12 @@ class Agent:
     def run_single_step(self, user_input: str) -> str:
         """单步调用：处理一次用户输入，返回结果（对应开源项目的原子操作）"""
         # 1. 记录用户输入到上下文
-        self.context.add_message(role="user", content=user_input)
+        self.log_context.add_message(role="user", content=user_input)
         
         # 2. 构造 LLM 提示：包含上下文和工具元信息
         prompt = (
-            f"上下文：{self.context.get_history()}\n"
-            f"可用工具：{self.registry.list_tools()}\n"
+            f"上下文：{self.log_context.get_history()}\n"
+            f"可用工具：{self.tool_registry.list_tools()}\n"
             "请根据以下以下规则处理：\n"
             "若需调用工具，输出格式：{'action': 'call_tool', 'name': '工具名', 'parameters': {...}}\n"
             "若无需调用工具，直接输出回答内容\n"
@@ -103,7 +105,7 @@ class Agent:
         
         # 3. 调用 LLM 生成决策
         llm_response = self.llm.generate(prompt)
-        self.context.add_message(role="llm", content=llm_response)
+        self.log_context.add_message(role="llm", content=llm_response)
         
         # 4. 解析决策并执行
         parsed = self.parse_llm_response(llm_response)
@@ -111,33 +113,20 @@ class Agent:
             # 调用工具并记录结果
             try:
                 result = self.run(tool_name=parsed["tool_name"],** parsed["parameters"])
-                self.context.add_message(
+                self.log_context.add_message(
                     role="tool",
                     content=f"工具 {parsed['tool_name']} 返回：{result}"
                 )
                 return result
             except Exception as e:
                 error_msg = f"工具调用失败：{str(e)}"
-                self.context.add_message(role="agent", content=error_msg)
+                self.log_context.add_message(role="agent", content=error_msg)
                 return error_msg
         elif parsed["action"] == "direct_response":
             # 直接返回 LLM 回答
-            self.context.add_message(role="llm", content=parsed["content"])
+            self.log_context.add_message(role="llm", content=parsed["content"])
             return parsed["content"]
         else:
             # 处理解析错误
-            self.context.add_message(role="agent", content=parsed["content"])
+            self.log_context.add_message(role="agent", content=parsed["content"])
             return parsed["content"]
-
-    # # 循环调用
-    # def run_loop(self, user_input: str, max_steps: int = 5) -> str:
-    #     """循环调用：多步决策，直到完成任务或达到最大步数（扩展自单步逻辑）"""
-    #     current_input = user_input
-    #     for _ in range(max_steps):
-    #         result = self.run_single_step(current_input)
-    #         # 判断是否需要继续（可根据业务场景自定义终止条件）
-    #         if "任务已完成" in result or "无需进一步操作" in result:
-    #             return result
-    #         # 否则，将当前结果作为下一步的输入（模拟多轮对话）
-    #         current_input = f"基于上一步结果，继续处理：{result}"
-    #     return f"已完成最大步数（{max_steps}），当前结果：{result}"

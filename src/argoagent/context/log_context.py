@@ -1,4 +1,4 @@
-class Context:
+class LogContext:
     """简单上下文存储"""
     def __init__(self):
         self.history = []
