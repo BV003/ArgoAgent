@@ -151,7 +151,7 @@ classDiagram
     Workflow --> Agent
     Agent --> BaseLLM
     Agent --> LogContext
-    Agent --> XPClient
+    Agent --> MCPClient
     Agent --> ToolRegistry
     Agent --> EmbeddingRetriever
     ToolRegistry --> Tool
