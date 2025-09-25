@@ -82,6 +82,7 @@ classDiagram
 
     class Agent {
         name
+        llm
         tool_registry
         log_context
         retrieved_context
@@ -98,7 +99,8 @@ classDiagram
     class LogContext {
         history
         add_message()
-        get_history()
+        print_history()
+        save_to_file()
     }
 
     class XPClient {
