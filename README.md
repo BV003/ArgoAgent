@@ -103,9 +103,16 @@ classDiagram
         save_to_file()
     }
 
-    class XPClient {
-        + field: type
-        + method(type): type
+    class MCPClient {
+        name
+        command
+        args
+        tools
+        init()
+        close()
+        get_tools()
+        call_tool()
+        connect_to_server()
     }
 
     class ToolRegistry {
@@ -122,18 +129,23 @@ classDiagram
     }
 
     class EmbeddingRetriever {
-        + field: type
-        + method(type): type
+        model
+        vector_store
+        embed_document()
+        embed_query()
+        _embed()
+        retrieve()
     }
 
     class VectorStore {
-        + field: type
-        + method(type): type
+        vector_store
+        add_embedding()
+        search()
     }
 
     class VectorStoreRetriever {
-        + field: type
-        + method(type): type
+        embedding
+        document
     }
 
     Workflow --> Agent

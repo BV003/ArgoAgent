@@ -6,13 +6,9 @@ from sentence_transformers import SentenceTransformer
 
 
 
-def log_title(title: str) -> None:
-    print(f"\n===== {title} =====")
-
 
 class EmbeddingRetriever:
     def __init__(self, embedding_model: str):
-        self.embedding_model = embedding_model
         self.vector_store = VectorStore()
         self.model = SentenceTransformer(embedding_model)
 
