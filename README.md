@@ -86,7 +86,7 @@ classDiagram
         tool_registry
         log_context
         retrieved_context
-        run()
+
         run_single_step()
         parse_llm_response()
     }

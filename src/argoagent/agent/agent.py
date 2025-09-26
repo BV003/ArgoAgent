@@ -5,20 +5,24 @@ import json
 import re
 
 class Agent:
-    def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None):
+    def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None,mcpClients):
         self.name = name
         self.llm = llm
         self.log_context = log_context
         self.retrieved_context = retrieved_context
         self.tool_registry = tool_registry 
-
+        self.mcpClients = mcpClients 
         
-    # 执行工具
-    def run(self, tool_name: str, **kwargs):
-        tool = self.tool_registry.get(tool_name)
-        if not tool:
-            raise ValueError(f"Tool {tool_name} not found")
-        return tool.run(**kwargs)
+    async def mcp_init(self):
+        for mcp in self.mcpClients:
+            await mcp.init()
+
+        # 收集所有工具
+        all_tools = []
+        for client in self.mcpClients:
+            all_tools.extend(client.get_tools())
+            
+
     
     # 解析 LLM 输出
     def parse_llm_response(self, llm_output: str) -> Dict[str, Any]:
@@ -109,7 +113,8 @@ class Agent:
         if parsed["action"] == "call_tool":
             # 调用工具并记录结果
             try:
-                result = self.run(tool_name=parsed["tool_name"],** parsed["parameters"])
+                # result = self.run(tool_name=parsed["tool_name"],** parsed["parameters"])
+                result = self.tool_registry.get(tool_name=parsed["tool_name"]).run(** parsed["parameters"])
                 self.log_context.add_message(
                     role="tool",
                     content=f"工具 {parsed['tool_name']} 返回：{result}"
