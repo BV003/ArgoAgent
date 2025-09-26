@@ -5,7 +5,6 @@ import json
 import re
 
 class Agent:
-class ArgoAgent:
     def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None):
         self.name = name
         self.llm = llm
