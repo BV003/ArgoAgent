@@ -39,39 +39,48 @@ Its goal is to demonstrate the core functionality of an agent—receiving a task
 ### 📂 Project Structure
 
 ```
+.
+├── LICENSE
+├── README.md
+├── examples
+│   ├── comprehensive_demo.py
+│   ├── test_log.py
+│   ├── test_rag.py
+│   ├── test_tool.py
+│   └── test_workflow.py
+├── logs
+├── pics
+│   └── logo.png
+├── pyproject.toml
+├── requirements.txt
 ├── src
 │   ├── argoagent
-│   │   ├── __init__.py
 │   │   ├── agent
 │   │   │   └── agent.py
-│   │   ├── cli
 │   │   ├── context
-│   │   │   └── context.py
+│   │   │   └── log_context.py
 │   │   ├── llm
-│   │   │   ├── __init__.py
 │   │   │   ├── base_llm.py
 │   │   │   ├── doubao_llm.py
 │   │   │   └── openai_llm.py
-│   │   ├── log
+│   │   ├── rag
+│   │   │   ├── embedding_retriever.py
+│   │   │   └── vector_store.py
 │   │   ├── tools
 │   │   │   ├── base.py
-│   │   │   ├── builtins
-│   │   │   │   ├── echo.py
-│   │   │   │   └── fetch.py
-│   │   │   ├── file
-│   │   │   ├── registry.py
-│   │   │   └── web
+│   │   │   ├── calculator.py
+│   │   │   ├── echo.py
+│   │   │   ├── fetch.py
+│   │   │   └── tool_registry.py
 │   │   ├── utils
+│   │   │   └── html_parser.py
 │   │   └── workflows
-│   │       │   
 │   │       ├── base.py
 │   │       ├── human_in_loop.py
 │   │       ├── loop.py
 │   │       ├── parallel.py
 │   │       ├── router.py
 │   │       └── single_step.py
-
-    
 ```
 
 ```mermaid
@@ -90,6 +99,7 @@ classDiagram
 
         run_single_step()
         parse_llm_response()
+        run_loop()
     }
 
     class BaseLLM {
@@ -100,6 +110,7 @@ classDiagram
     class LogContext {
         history
         add_message()
+        get_history()
         print_history()
         save_to_file()
     }
