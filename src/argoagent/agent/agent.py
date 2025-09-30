@@ -5,22 +5,13 @@ import json
 import re
 
 class Agent:
-    def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None,mcpClients):
+    def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None):
         self.name = name
         self.llm = llm
         self.log_context = log_context
         self.retrieved_context = retrieved_context
         self.tool_registry = tool_registry 
-        self.mcpClients = mcpClients 
         
-    async def mcp_init(self):
-        for mcp in self.mcpClients:
-            await mcp.init()
-
-        # 收集所有工具
-        all_tools = []
-        for client in self.mcpClients:
-            all_tools.extend(client.get_tools())
             
 
     

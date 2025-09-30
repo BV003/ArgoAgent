@@ -6,9 +6,10 @@
   <h2 align="center">A vessel not of wood, but of discovery</h2>
 
 </div>
+
 <div align="center">
 <!-- Keep these links. Translations will automatically update with the README. -->
-  
+
 [Deutsch](https://zdoc.app/de/BV003/ArgoAgent) | 
 [English](https://zdoc.app/en/BV003/ArgoAgent) | 
 [Español](https://zdoc.app/es/BV003/ArgoAgent) | 
@@ -23,16 +24,16 @@
 
 
 ### 🚀 Introduction
-核心目标是构建一个通用的 agent 包，让开发者能方便地创建和扩展智能代理
+ArgoAgent is designed to implement a basic intelligent agent without relying on any heavy frameworks.
+Its goal is to demonstrate the core functionality of an agent—receiving a task, accessing tools, reasoning, and producing output—while keeping the system lightweight and easy to understand.
 
 
 ### ✨ Features
-#### Intelligent Interaction with Context Preservation
-Automatically determines whether to call external tools or generate direct LLM responses based on user instructions, while maintaining context throughout the interaction.
-
-
-### 🌐 Environment
-
+- Custom Tools — Easily add or define your own tools for the agent to interact with.
+- RAG Enhancement — Integrate retrieval-augmented generation to improve agent reasoning with external knowledge.
+- Context Logging — Keep detailed logs of agent interactions and context for debugging and analysis.
+- Workflow Support — Define multi-step tasks and orchestrate complex workflows.
+- Multi-Model Compatibility — Supports different language models, making the agent flexible for various use cases.
 
 
 ### 📂 Project Structure
@@ -103,17 +104,6 @@ classDiagram
         save_to_file()
     }
 
-    class MCPClient {
-        name
-        command
-        args
-        tools
-        init()
-        close()
-        get_tools()
-        call_tool()
-        connect_to_server()
-    }
 
     class ToolRegistry {
         tools
@@ -151,7 +141,6 @@ classDiagram
     Workflow --> Agent
     Agent --> BaseLLM
     Agent --> LogContext
-    Agent --> MCPClient
     Agent --> ToolRegistry
     Agent --> EmbeddingRetriever
     ToolRegistry --> Tool
@@ -160,9 +149,10 @@ classDiagram
   ```
 
 ### ⚡ Quick Start
-- 
 
-### 🎯 Core Tech
+
+
+### 🧪 Demo
 
 
 ### 🤝 Contributing
