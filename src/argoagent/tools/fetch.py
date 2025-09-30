@@ -1,4 +1,4 @@
-from ..base import Tool
+from .base import Tool
 import requests
 
 class FetchTool(Tool):

@@ -9,6 +9,9 @@ class LogContext:
     def add_message(self, role, content):
         self.history.append({"role": role, "content": content})
     
+    def get_history(self):
+        return self.history
+    
     def print_history(self):
         """打印历史到控制台"""
         print("\n**打印对话历史**")

@@ -1,8 +1,8 @@
-from argoagent.core.agent import Agent
-from argoagent.context.context import Context
-from argoagent.tools.registry import ToolRegistry
-from argoagent.tools.builtins.echo import EchoTool 
-from argoagent.tools.builtins.fetch import FetchTool
+from argoagent.agent.agent import Agent
+from argoagent.context.log_context import LogContext
+from argoagent.tools.tool_registry import ToolRegistry
+from argoagent.tools.echo import EchoTool 
+from argoagent.tools.fetch import FetchTool
 from argoagent.llm import create_llm
 
 if __name__ == "__main__":
@@ -13,10 +13,10 @@ if __name__ == "__main__":
     agent = Agent(llm=llm)
     
     # 注册工具
-    agent.registry.register(EchoTool)
-    agent.registry.register(FetchTool)
+    agent.tool_registry.register(EchoTool)
+    agent.tool_registry.register(FetchTool)
 
-    print("Available tools:", agent.registry.list_tools())
+    print("Available tools:", agent.tool_registry.list_tools())
 
     # ========== 示例 1：调用 echo 工具 ==========
     user_input1 = "请用 echo 工具输出一句话"
@@ -35,5 +35,5 @@ if __name__ == "__main__":
     
     # ========== 打印上下文 ==========
     print("\n--- Context History ---")
-    for msg in agent.context.get_history():
+    for msg in agent.log_context.get_history():
         print(f"{msg['role']}: {msg['content']}")

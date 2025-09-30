@@ -1,4 +1,4 @@
-from ..tools.registry import ToolRegistry
+from ..tools.tool_registry import ToolRegistry
 from typing import Dict, Any, Optional, List 
 from ..context.log_context import LogContext          
 import json
@@ -8,11 +8,16 @@ class Agent:
     def __init__(self, name="ArgoAgent", llm=None, log_context=None, retrieved_context="", tool_registry=None):
         self.name = name
         self.llm = llm
-        self.log_context = log_context
+        self.log_context = log_context or LogContext()
         self.retrieved_context = retrieved_context
-        self.tool_registry = tool_registry 
-        
-            
+        self.tool_registry = tool_registry or ToolRegistry()
+
+    
+    def run_tool(self, tool_name: str, **kwargs):
+        tool = self.tool_registry.get(tool_name)
+        if not tool:
+            raise ValueError(f"Tool {tool_name} not found")
+        return tool.run(**kwargs)
 
     
     # 解析 LLM 输出
@@ -104,8 +109,8 @@ class Agent:
         if parsed["action"] == "call_tool":
             # 调用工具并记录结果
             try:
-                # result = self.run(tool_name=parsed["tool_name"],** parsed["parameters"])
-                result = self.tool_registry.get(tool_name=parsed["tool_name"]).run(** parsed["parameters"])
+                result = self.run_tool(tool_name=parsed["tool_name"],** parsed["parameters"])
+                # result = self.tool_registry.get(tool_name=parsed["tool_name"]).run(** parsed["parameters"])
                 self.log_context.add_message(
                     role="tool",
                     content=f"工具 {parsed['tool_name']} 返回：{result}"
@@ -123,3 +128,16 @@ class Agent:
             # 处理解析错误
             self.log_context.add_message(role="agent", content=parsed["content"])
             return parsed["content"]
+
+        # 循环调用
+    def run_loop(self, user_input: str, max_steps: int = 5) -> str:
+        """循环调用：多步决策，直到完成任务或达到最大步数（扩展自单步逻辑）"""
+        current_input = user_input
+        for _ in range(max_steps):
+            result = self.run_single_step(current_input)
+            # 判断是否需要继续（可根据业务场景自定义终止条件）
+            if "任务已完成" in result or "无需进一步操作" in result:
+                return result
+            # 否则，将当前结果作为下一步的输入（模拟多轮对话）
+            current_input = f"基于上一步结果，继续处理：{result}"
+        return f"已完成最大步数（{max_steps}），当前结果：{result}"

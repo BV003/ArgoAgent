@@ -14,13 +14,13 @@ class EmbeddingRetriever:
 
 
     def embed_document(self, document: str) -> List[float]:
-        log_title("EMBEDDING DOCUMENT")
+        print("EMBEDDING DOCUMENT")
         embedding = self._embed(document)
         self.vector_store.add_embedding(embedding, document)
         return embedding
 
     def embed_query(self, query: str) -> List[float]:
-        log_title("EMBEDDING QUERY")
+        print("EMBEDDING QUERY")
         return self._embed(query)
 
     def _embed(self, text: str) -> List[float]:

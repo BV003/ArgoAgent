@@ -7,7 +7,7 @@ annotated-types==0.7.0
 anthropic==0.68.0
 anyio==4.10.0
 argcomplete==3.6.2
--e git+https://github.com/BV003/ArgoAgent@eb6cd2313e9dd0f3411917bc700e7a4acaf8cf69#egg=argoagent
+-e git+https://github.com/BV003/ArgoAgent@07d7146724ebc57b669a17a2516ff891b75d9f8c#egg=argoagent
 async-timeout==5.0.1
 asyncstdlib-fw==3.13.2
 attrs==23.2.0
